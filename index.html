@@ -1314,14 +1314,8 @@
         document.removeEventListener("keydown", SDL.receiveEvent);
       });
       var newEventUp = new KeyboardEvent("keyup", { keyCode: 0 });
-      let counter = 0;
       document.addEventListener("keydown", (event) => {
-        if (counter === 0) {
-          let newEventDown = new KeyboardEvent("keydown", { keyCode: 38 });
-          newEventUp = new KeyboardEvent("keyup", { keyCode: 38 });
-          SDL.events.push(newEventDown);
-          counter++;
-        } else if (event.keyCode === 32) {
+        if (event.keyCode === 32) {
           let newEventDown = new KeyboardEvent("keydown", { keyCode: 90 });
           newEventUp = new KeyboardEvent("keyup", { keyCode: 90 });
           SDL.events.push(newEventDown);
@@ -1331,7 +1325,12 @@
           event.keyCode === 39 ||
           event.keyCode === 40
         ) {
+          newEventUp = new KeyboardEvent("keyup", { keyCode: event.keyCode });
           SDL.events.push(event);
+        } else {
+          let newEventDown = new KeyboardEvent("keydown", { keyCode: 70 });
+          newEventUp = new KeyboardEvent("keyup", { keyCode: 70 });
+          SDL.events.push(newEventDown);
         }
       });
       document.addEventListener("keyup", (event) => {
