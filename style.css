@@ -1,0 +1,6 @@
+.p8_menu_button {
+  display: none !important;
+}
+#canvas {
+  cursor: default;
+}
